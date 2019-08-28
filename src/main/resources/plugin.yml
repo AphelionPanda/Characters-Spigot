@@ -1,0 +1,63 @@
+name: "Characters"
+main: "online.christopherstocks.characters.Characters"
+version: "6.1.0.0"
+description: "The Ultimate Minecraft Roleplay Character Card Plugin"
+authors: ["Highchrisben","Bean274"]
+website: "https://christopherstocks.online"
+softdepend: [PlaceholderAPI]
+
+permissions:
+  characters.player:
+    description: "The Base characters Permission"
+    default: true
+    children:
+      - "characters.use"
+      - "characters.slot"
+      - "characters.display"
+      - "characters.field.*"
+  characters.staff:
+    description: "The Staff characters Permission"
+    default: op
+    children:
+      - "characters.reload"
+      - "characters.slot.other"
+      - "characters.debug"
+      - "characters.update"
+      - "characters.display.other"
+      - "characters.reload"
+      - "characters.reset"
+      - "characters.reset.other"
+      - "characters.delete"
+  characters.fields.*:
+    description: "Allows for changing of all fields"
+  characters.use:
+    description: "Allows use of the characters command and creation of storage for a player - required"
+  characters.reload:
+    description: "Allows for reloading"
+  characters.slot:
+    description: "Allows for using the slot command, if enabled"
+  characters.slot.other:
+    description: "Allows for altering the slot of another"
+  characters.debug:
+    description: "Allows for debugging the config using /characters debug"
+  characters.update:
+    description: "Notifies if there is an update or not on each login for anyone with the permission"
+  characters.display:
+    description: "Allows for viewing; stats, points, race and class!"
+  characters.display.other:
+    description: "Allows for viewing others display"
+  characters.reset:
+    description: "Allows for resetting their characters slot"
+  characters.reset.other:
+    description: "Allows for resetting other's characters slots"
+  characters.delete:
+    description: "Allows for deleting old records (using inactive days from config)"
+
+commands:
+  characters:
+    description: The Base Character Command
+    permission: characters.use
+    aliases:
+      - "char"
+      - "character"
+    permission-message: "You do not have permission to use this command!"

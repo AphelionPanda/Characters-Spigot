@@ -1,0 +1,84 @@
+# Storage
+## Connection Details
+## (Note: Do not change these details while the plugin is enabled)
+host: "localhost"
+port: 3306
+database: "Characters"
+table_prefix: "characters_"
+username: "root"
+password: "password"
+
+## MySQL is currently the only Storage supported - SQLite is in testing, please report if it works.
+storage: MySQL
+
+## How often should inactive players be purged (in days) - 0 is never
+## This occurs once per restart of the Plugin/On command
+inactive-days: 0
+
+# This will be used to fields stats which are not in use
+fields:
+  - Name
+  - Gender
+  - Hometown
+  - Age
+  - Description
+
+# Allows the Plugin to notify you when updates are available
+update-enabled: true
+
+# Allows for updates of beta versions, this will not matter if you are running a beta already
+beta-version: false
+
+# Allocates a Player the amount of slots defined - Setting this to 0 or below will default to 1
+slots: 1
+
+# Set this to true if another plugin is handling slots through the Storage Methods
+slot-handler: false
+
+# Allows for PlaceholderAPI to be used, this will alter itself
+placeholders: false
+
+# New Messages
+update: "&6[&fCharacters&6]&f A New Update is available"
+no-update: "&6[&fCharacters&6]&f No New Update is available"
+sender: "&6[&fCharacters&6]&f You have to be a player"
+help: "&6[&fCharacters&6]&f Please use '/character help' for more information about each command!"
+slot-disabled: "&6[&fCharacters&6]&f Slots are being handled by another plugin"
+slot-singular: "&6[&fCharacters&6]&f You can only access one slot"
+permission: "&6[&fCharacters&6]&f You do not have the correct permission for this"
+slot: "&6[&fCharacters&6]&f Currently using Slot :slot:"
+slot-invalid: "&6[&fCharacters&6]&f The slot you entered is not in use or inaccessible"
+player-exist: "&6[&fCharacters&6]&f That player does not seem to exist at the current moment"
+switch: "&6[&fCharacters&6]&f You are now using Slot :slot:"
+switch-other: "&6[&fCharacters&6]&f They are now using Slot :slot:"
+reload: "&6[&fCharacters&6]&f The Config has now been reloaded"
+help-invalid: "&6[&fCharacters&6]&f That page does not exist or is not in use"
+reset: "&6[&fCharacters&6]&f Your slot :slot: has been reset"
+reset-other: "&6[&fCharacters&6]&f That players slot :slot: has been reset"
+delete: "&6[&fCharacters&6]&f All inactive players are now being deleted"
+delete-0: "&6[&fCharacters&6]&f Inactive Days has not been configured"
+characters-invalid: "&6[&fCharacters&6]&f That fields is invalid"
+characters-reset: "&6[&fCharacters&6]&f Your slot :slot: fields have been reset"
+characters-reset-other: "&6[&fCharacters&6]&f That players slot :slot: fields have been reset"
+characters-alter: "&6[&fCharacters&6]&f Your slot :slot: fields have been altered"
+characters-alter-other: "&6[&fCharacters&6]&f That players slot :slot: fields have been altered"
+colour: "&6[&fCharacters&6]&f You are not allowed to use colour"
+
+# Display Page
+display:
+  - "&6[&fCharacters&6]&f :player:'s Character for Slot :slot:"
+  - "&fName: &6:Name: &6| &fGender: &6:Gender: &6| &fHometown: &6:Hometown:"
+  - "&fDescription: &6:Description:"
+
+# Help Pages
+help-items: 9
+help-pages:
+  - "&6[&fCharacters Help&6]&f :page: of &6:pages:"
+  - "&6 o - means optional | <-> means switchable | a - means alternate"
+  - "&f/character help [page] - shows the help command"
+  - "&6/character debug ...parameters... - displays the config values"
+  - "&f/character slot [o:player]<->[o:slot] - shows and sets the slots of self/others "
+  - "&6/character reload - reloads the config"
+  - "&f/character reset [o:slot]<->[o:player] - resets all of self/others slot"
+  - "&6/character delete - deletes inactive players"
+  - "&f/character [o:p:{player}]<->[o:s:{slot}] [field] - alters fields"
