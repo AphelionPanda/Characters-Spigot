@@ -14,10 +14,20 @@ class MySQL : Storage() {
         Bukkit.getScheduler().runTaskAsynchronously(config.getInstance(), Runnable {
             connection.prepareStatement("CREATE DATABASE IF NOT EXISTS $database;").executeUpdate()
             connection.prepareStatement("CREATE TABLE IF NOT EXISTS $database.${table_prefix}Fields (field varchar(3072) NOT NULL UNIQUE);").executeUpdate()
-            connection.prepareStatement("CREATE TABLE IF NOT EXISTS $database.${table_prefix}Players (id varchar(3072) UNIQUE NOT NULL, uuid varchar(3072) NOT NULL, username varchar(3072) NOT NULL, slot bigint NOT NULL, last bigint NOT NULL);").executeUpdate()
+            connection.prepareStatement("CREATE TABLE IF NOT EXISTS $database.${table_prefix}Players (uuid varchar(3072) NOT NULL, username varchar(3072) NOT NULL, slot bigint NOT NULL, last bigint NOT NULL);").executeUpdate()
             connection.prepareStatement("CREATE TABLE IF NOT EXISTS $database.${table_prefix}Active (uuid varchar(3072) NOT NULL UNIQUE, username varchar(3072) NOT NULL, active bigint UNSIGNED NOT NULL);").executeUpdate()
             connection.close()
             updateFields()
+        })
+    }
+
+    // This will serve updates to databases should there be any additions or removals!
+    override fun updatePlugin() {
+        val connection = openConnection()
+        // V6.1.0.2
+        Bukkit.getScheduler().runTaskAsynchronously(config.getInstance(), Runnable {
+            connection.prepareStatement("ALTER TABLE $database.${table_prefix}Players DROP COLUMN id").executeUpdate()
+            connection.close()
         })
     }
 
@@ -73,7 +83,7 @@ class MySQL : Storage() {
         val time = System.currentTimeMillis()
         Bukkit.getScheduler().runTaskAsynchronously(config.getInstance(), Runnable {
             for (i in 0 until config.getConfig().getInt("slots")) {
-                connection.prepareStatement("INSERT IGNORE INTO $database.${table_prefix}Players (uuid, username, slot, id, last) VALUES ('$uuid', '$name','$i', '$uuid:$i', '$time');").executeUpdate()
+                connection.prepareStatement("INSERT IGNORE INTO $database.${table_prefix}Players (uuid, username, slot, last) VALUES ('$uuid', '$name','$i', '$time');").executeUpdate()
             }
             connection.prepareStatement("INSERT IGNORE INTO $database.${table_prefix}Active (uuid, username, active) VALUES ('$uuid', '$name', 0);").executeUpdate()
             connection.close()
